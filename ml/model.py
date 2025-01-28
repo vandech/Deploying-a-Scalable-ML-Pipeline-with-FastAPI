@@ -1,5 +1,5 @@
 import pickle
-from sklearn.metrics import fbeta_score, precision_score, recall_score, confusion_matrix
+from sklearn.metrics import fbeta_score, precision_score, recall_score
 from ml.data import process_data
 # TODO: add necessary import
 from sklearn.ensemble import GradientBoostingClassifier
