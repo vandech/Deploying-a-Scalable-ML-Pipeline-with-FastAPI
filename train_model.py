@@ -13,7 +13,7 @@ from ml.model import (
     train_model,
 )
 # TODO: load the cencus.csv data
-project_path = "https://github.com/vandech/Deploying-a-Scalable-ML-Pipeline-with-FastAPI/tree/main/data/census.csv"
+project_path = "https://github.com/vandech/Deploying-a-Scalable-ML-Pipeline-with-FastAPI/"
 data_path = os.path.join(project_path, "data", "census.csv")
 print(data_path)
 data = pd.read_csv(data_path) # your code here
@@ -83,7 +83,7 @@ for col in cat_features:
     for slicevalue in sorted(test[col].unique()):
         count = test[test[col] == slicevalue].shape[0]
         p, r, fb = performance_on_categorical_slice(
-            # your code here
+            # your code herecd
             test=test,  # use test, col and slicevalue as part of the input
             feature=col,
             value=slicevalue
