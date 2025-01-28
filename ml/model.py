@@ -1,7 +1,17 @@
 import pickle
-from sklearn.metrics import fbeta_score, precision_score, recall_score
+from sklearn.metrics import fbeta_score, precision_score, recall_score, confusion_matrix
 from ml.data import process_data
 # TODO: add necessary import
+from sklearn.ensemble import GradientBoostingClassifier
+from sklearn.model_selection import GridSearchCV
+import pandas as pd
+import multiprocessing
+import logging
+
+logging.basicConfig(filename='journal.log',
+                    level=logging.INFO,
+                    filemode='w',
+                    format='%(name)s - %(levelname)s - %(message)s')
 
 # Optional: implement hyperparameter tuning.
 def train_model(X_train, y_train):
@@ -20,7 +30,28 @@ def train_model(X_train, y_train):
         Trained machine learning model.
     """
     # TODO: implement the function
-    pass
+    parameters = {
+        'n_estimators': [10, 20, 30],
+        'max_depth': [5, 10],
+        'min_samples_split': [20, 50, 100],
+        'learning_rate': [1.0],  # 0.1,0.5,
+    }
+
+    njobs = multiprocessing.cpu_count() - 1
+    logging.info("Searching best hyperparameters on {} cores".format(njobs))
+
+    clf = GridSearchCV(GradientBoostingClassifier(random_state=0),
+                       param_grid=parameters,
+                       cv=3,
+                       n_jobs=njobs,
+                       verbose=2,
+                       )
+
+    clf.fit(X_train, y_train)
+    logging.info("********* Best parameters found ***********")
+    logging.info("BEST PARAMS: {}".format(clf.best_params_))
+
+    return clf
 
 
 def compute_model_metrics(y, preds):
