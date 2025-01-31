@@ -88,9 +88,9 @@ for col in cat_features:
         count = test[test[col] == slicevalue].shape[0]
         p, r, fb = performance_on_categorical_slice(
             # your code herecd
-            data=test,  # use test, col and slicevalue as part of the input
-            feature=col,
-            value=slicevalue
+            test,  # use test, col and slicevalue as part of the input
+            col,
+            slicevalue
         )
         with open("slice_output.txt", "a") as f:
             print(f"{col}: {slicevalue}, Count: {count:,}", file=f)
