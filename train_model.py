@@ -88,7 +88,7 @@ for col in cat_features:
         count = test[test[col] == slicevalue].shape[0]
         p, r, fb = performance_on_categorical_slice(
             # your code herecd
-            test=test,  # use test, col and slicevalue as part of the input
+            data=test,  # use test, col and slicevalue as part of the input
             feature=col,
             value=slicevalue
         )
