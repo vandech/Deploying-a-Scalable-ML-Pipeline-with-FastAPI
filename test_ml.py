@@ -12,12 +12,14 @@ from sklearn.exceptions import NotFittedError
 from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import fbeta_score, precision_score, recall_score
+from ml.model import train_model, save_model, load_model, compute_model_metrics, inference  # Imports functions
+
+
+
 
 # Mock logging (important for tests)
 logging.basicConfig(level=logging.INFO)  # Setting the default level
 test_logger = logging.getLogger(__name__)  # Creating a logger for the test file
-
-
 @pytest.fixture
 def mock_logger(monkeypatch):
     def mock_info(msg, *args, **kwargs):
@@ -65,7 +67,6 @@ def save_model(tmp_path):
 
 
 
-
 # TODO: implement the third test. Change the function name and input as needed
 def test_load_model(tmp_path):
     """
@@ -76,14 +77,14 @@ def test_load_model(tmp_path):
     # Your code here
     model_original = GradientBoostingClassifier()
     path = tmp_path / "test_model.pkl"
-    save_model(model_original, str(path))
+    save_model(model_original, str(path))  # Corrected: Passing both model and path
 
     model_loaded = load_model(str(path))
 
-    assert isinstance(model_loaded, GradientBoostingClassifier)  # Check if the loaded model has the correct type
-    # You might want to add more checks to ensure the loaded model is equivalent to the original.
-    # For example, you could compare the predictions of both models on some data.
+    assert isinstance(model_loaded, GradientBoostingClassifier)
     X = np.array([[1, 2], [3, 4]])
     assert np.array_equal(model_original.predict(X), model_loaded.predict(X))
+
+
 
 
