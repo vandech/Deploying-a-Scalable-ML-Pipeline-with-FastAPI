@@ -15,40 +15,28 @@ from sklearn.metrics import fbeta_score, precision_score, recall_score
 from ml.model import train_model, save_model, load_model, compute_model_metrics, inference  # Imports functions
 
 
-
-
-# Mock logging (important for tests)
-logging.basicConfig(level=logging.INFO)  # Setting the default level
-test_logger = logging.getLogger(__name__)  # Creating a logger for the test file
-@pytest.fixture
-def mock_logger(monkeypatch):
-    def mock_info(msg, *args, **kwargs):
-        test_logger.info(msg, *args, **kwargs)
-        monkeypatch.setattr(logging, "info", mock_info)
-        return test_logger
-
-
-# Mock multiprocessing (to avoid actual parallel processing in tests)
-@pytest.fixture
-def mock_cpu_count(monkeypatch):
-    monkeypatch.setattr(multiprocessing, "cpu_count", lambda: 2)  # simulate 2 cores
-
 # TODO: implement the first test. Change the function name and input as needed
-def test_train_model(mock_cpu_count, mock_logger): # Injects mocks
+def test_compute_model_metrics():
     """
     # add description for the first test
     Check if it returns the expected model type
     """
     # Your code here
-    X_train = np.array([[1, 2], [3, 4]])
-    y_train = np.array([0, 1])
+    y_true = np.array([0, 1, 1, 0])
+    y_pred = np.array([0, 1, 0, 0])
 
-    model = train_model(X_train, y_train)
+    precision, recall, fbeta = compute_model_metrics(y_true, y_pred)
 
-    assert isinstance(model, GridSearchCV)  # Check if it's a GridSearchCV object
-    assert hasattr(model, 'best_estimator_')  # Check that best_estimator_ is present after training
-    assert isinstance(model.best_estimator_, GradientBoostingClassifier)  # Check if best_estimator_ is a GradientBoostingClassifier
-    assert model.csv == 3
+    assert precision == 1.0  # Or 0.5 depending on how you want to handle this case.
+    assert recall == 0.5
+    assert fbeta == 0.6666666666666666y_true = np.array([0, 1, 1, 0])
+    y_pred = np.array([0, 1, 0, 0])
+
+    precision, recall, fbeta = compute_model_metrics(y_true, y_pred)
+
+    assert precision == 1.0  # Or 0.5 depending on how you want to handle this case.
+    assert recall == 0.5
+    assert fbeta == 0.6666666666666666
 
 
 
