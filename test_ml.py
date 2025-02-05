@@ -10,8 +10,6 @@ from ml.model import inference, compute_model_metrics
 from ml.data import process_data
 
 
-
-
 # TODO: add necessary import
 
 # TODO: implement the first test. Change the function name and input as needed
@@ -31,14 +29,14 @@ def test_features(data, features):
 
 
 # TODO: implement the second test. Change the function name and input as needed
-def test_inference(train_dataset):
+def test_inference(data):
     """
     # add description for the second test
     Check inference function
     """
     # Your code here
 
-    X_train, y_train = train_dataset
+    X_train, y_train = data
 
     savepath = "./model/trained_model.pkl"
     if os.path.isfile(savepath):
@@ -55,7 +53,7 @@ def test_inference(train_dataset):
 
 
 # TODO: implement the third test. Change the function name and input as needed
-def test_compute_model_metrics(train_dataset):
+def test_compute_model_metrics(data):
     """
     # add description for the third test
 
@@ -63,7 +61,7 @@ def test_compute_model_metrics(train_dataset):
     """
     # Your code here
 
-    X_train, y_train = train_dataset
+    X_train, y_train = data
 
     savepath = "./model/trained_model.pkl"
     if os.path.isfile(savepath):
