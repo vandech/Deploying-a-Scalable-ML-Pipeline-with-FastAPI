@@ -48,6 +48,7 @@ def test_train_model(mock_cpu_count, mock_logger): # Injects mocks
     assert isinstance(model, GridSearchCV)  # Check if it's a GridSearchCV object
     assert hasattr(model, 'best_estimator_')  # Check that best_estimator_ is present after training
     assert isinstance(model.best_estimator_, GradientBoostingClassifier)  # Check if best_estimator_ is a GradientBoostingClassifier
+    assert model.csv == 3
 
 
 
@@ -68,22 +69,25 @@ def save_model(tmp_path):
 
 
 # TODO: implement the third test. Change the function name and input as needed
-def test_load_model(tmp_path):
+def test_inference():
     """
     # add description for the third test
 
-    Check whether the loaded object is of the correct type.
+    Check whether the inference function is working.
     """
     # Your code here
-    model_original = GradientBoostingClassifier()
-    path = tmp_path / "test_model.pkl"
-    save_model(model_original, str(path))  # Corrected: Passing both model and path
 
-    model_loaded = load_model(str(path))
+    # Create a simple mock model (replace with a real trained model for more thorough testing)
+    class MockModel:
+        def predict(self, X):
+            return np.array([1] * len(X))  # Always predict 1
 
-    assert isinstance(model_loaded, GradientBoostingClassifier)
-    X = np.array([[1, 2], [3, 4]])
-    assert np.array_equal(model_original.predict(X), model_loaded.predict(X))
+    model = MockModel()
+    X = np.array([[1, 2], [3, 4], [5, 6]])
+
+    preds = inference(model, X)
+
+    assert np.array_equal(preds, np.array([1, 1, 1]))
 
 
 
