@@ -42,7 +42,7 @@ def train_model(X_train, y_train):
 
     clf = GridSearchCV(GradientBoostingClassifier(random_state=0),
                        param_grid=parameters,
-                       cv=3,
+                       cv=min(3, len(X_train)),
                        n_jobs=njobs,
                        verbose=2,
                        )

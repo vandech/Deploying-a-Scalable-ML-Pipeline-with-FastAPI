@@ -31,34 +31,42 @@ def mock_cpu_count(monkeypatch):
     monkeypatch.setattr(multiprocessing, "cpu_count", lambda: 2)  # simulate 2 cores
 
 # TODO: implement the first test. Change the function name and input as needed
-def save_model(tmp_path):
+def test_save_model(tmp_path):
     """
     # add description for the first test
     Check if it returns the expected model type
     """
     # Your code here
-    model = GradientBoostingClassifier()  # or any model object
-    path = tmp_path / "test_model.pkl"  # creates a Path object for a temporary file
-    save_model(model, str(path))  # save model
+    model = GradientBoostingClassifier()
+    path = tmp_path / "test_model.pkl"
+    save_model(model, str(path))  # Corrected: Passing both model and path
 
-    assert path.is_file()  # check if file was created
+    assert path.is_file()
 
 
 # TODO: implement the second test. Change the function name and input as needed
-def test_compute_model_metrics()
+def test_load_model(tmp_path):
     """
     # add description for the second test
      check whether the file was created
     """
     # Your code here
-    y_true = np.array([0, 1, 1, 0])
-    y_pred = np.array([0, 1, 0, 0])
+    model_original = GradientBoostingClassifier()
+    # Fit the model before saving (this is the crucial step)
+    X_train = np.array([[1, 2], [3, 4]])  # Example training data
+    y_train = np.array([0, 1])  # Example training labels
+    model_original.fit(X_train, y_train)  # Train the model!
 
-    precision, recall, fbeta = compute_model_metrics(y_true, y_pred)
+    path = tmp_path / "test_model.pkl"
+    save_model(model_original, str(path))
 
-    assert precision == 1.0  # Or 0.5 depending on how you want to handle this case.
-    assert recall == 0.5
-    assert fbeta == 0.6666666666666666
+    model_loaded = load_model(str(path))
+
+    assert isinstance(model_loaded, GradientBoostingClassifier)
+
+    # Now you can safely predict:
+    X = np.array([[1, 2], [3, 4]])
+    assert np.array_equal(model_original.predict(X), model_loaded.predict(X))
 
 
 # TODO: implement the third test. Change the function name and input as needed
