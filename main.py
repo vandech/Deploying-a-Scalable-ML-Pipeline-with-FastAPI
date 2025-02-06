@@ -35,7 +35,7 @@ path = os.path.join(project_path, "model", "model.pkl") # TODO: enter the path f
 model = load_model(path)
 
 # TODO: create a RESTful API using FastAPI
-app = FastAPI( title = "Inference API",
+app = FastAPI(title = "Inference API",
                description = "An API that takes a sample and runs and inference",
                 version = "1.0.0") # your code here
 
@@ -44,7 +44,7 @@ app = FastAPI( title = "Inference API",
 async def get_root():
     """ Say hello!"""
     # your code here
-    "Welcome to our API"
+    return {"message": "Welcome to our API"}
 
 
 # TODO: create a POST on a different path that does model inference

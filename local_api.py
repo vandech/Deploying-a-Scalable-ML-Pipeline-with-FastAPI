@@ -2,6 +2,8 @@ import json
 
 import requests
 
+
+
 # TODO: send a GET using the URL http://127.0.0.1:8000
 r = "http://127.0.0.1:8000" # Your code here
 
@@ -13,7 +15,7 @@ print(f"GET request successful. Status code: {response_get.status_code}")
 
 # TODO: print the welcome message
 # print()
-welcome_message = response_get.json().get("message")
+message = response_get.json().get("message")
 
 
 data = {
@@ -34,7 +36,7 @@ data = {
 }
 
 # TODO: send a POST using the data above
-r = requests.post(f"{r}/inference/", json=post_data) # Your code here
+r = requests.post(f"{r}/inference/", json=data) # Your code here
 
 r.status_code == 200
 
