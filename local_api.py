@@ -3,13 +3,17 @@ import json
 import requests
 
 # TODO: send a GET using the URL http://127.0.0.1:8000
-r = None # Your code here
+r = "http://127.0.0.1:8000" # Your code here
 
+response_get = requests.get(r)
+response_get.status_code == 200
 # TODO: print the status code
 # print()
+print(f"GET request successful. Status code: {response_get.status_code}")
+
 # TODO: print the welcome message
 # print()
-
+welcome_message = response_get.json().get("message")
 
 
 data = {
@@ -30,9 +34,14 @@ data = {
 }
 
 # TODO: send a POST using the data above
-r = None # Your code here
+r = requests.post(f"{r}/inference/", json=post_data) # Your code here
+
+r.status_code == 200
 
 # TODO: print the status code
 # print()
+print(f"POST request successful. Status code: {r.status_code}")
+
 # TODO: print the result
 # print()
+result = r.json().get("result")

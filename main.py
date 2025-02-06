@@ -29,7 +29,7 @@ class Data(BaseModel):
 path = '\\wsl$\Ubuntu\home\vnde\Deploying-a-Scalable-ML-Pipeline-with-FastAPI\model\encoder.pki' # TODO: enter the path for the saved encoder
 encoder = load_model(path)
 
-path = '\\wsl$\Ubuntu\home\vnde\Deploying-a-Scalable-ML-Pipeline-with-FastAPI\model\model.pki # TODO: enter the path for the saved model
+path = '\\wsl$\Ubuntu\home\vnde\Deploying-a-Scalable-ML-Pipeline-with-FastAPI\model\model.pki' # TODO: enter the path for the saved model
 model = load_model(path)
 
 # TODO: create a RESTful API using FastAPI
