@@ -5,9 +5,9 @@ import requests
 
 
 # TODO: send a GET using the URL http://127.0.0.1:8000
-r = "http://127.0.0.1:8000" # Your code here
+API_URL = "http://127.0.0.1:8000" # Your code here
 
-response_get = requests.get(r)
+response_get = requests.get(API_URL)
 response_get.status_code == 200
 # TODO: print the status code
 # print()
@@ -36,14 +36,14 @@ data = {
 }
 
 # TODO: send a POST using the data above
-r = requests.post(f"{r}/inference/", json=data) # Your code here
+response_post = requests.post(f"{API_URL}/inference/", json=data) # Your code here
 
-r.status_code == 200
+response_post.status_code == 200
 
 # TODO: print the status code
 # print()
-print(f"POST request successful. Status code: {r.status_code}")
+print(f"POST request successful. Status code: {response_get.status_code}")
 
 # TODO: print the result
 # print()
-result = r.json().get("result")
+result = response_get.json().get("result")
