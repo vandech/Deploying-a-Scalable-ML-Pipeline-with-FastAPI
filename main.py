@@ -70,7 +70,8 @@ async def post_inference(data: Data):
     ]
     data_processed, _, _, _ = process_data(
         # your code here
-        data=data,
+        data,
+        encoder,
         training=False,
         # use data as data input
         # use training = False
