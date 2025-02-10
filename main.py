@@ -78,5 +78,5 @@ async def post_inference(data: Data):
         # use training = False
         # do not need to pass lb as input
     )
-    _inference = model.predict(data_processed) # your code here to predict the result using data_processed
+    _inference = inference(model,data_processed) # your code here to predict the result using data_processed
     return {"result": apply_label(_inference)}

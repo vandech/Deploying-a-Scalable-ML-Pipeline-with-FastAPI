@@ -36,7 +36,7 @@ data = {
 }
 
 # TODO: send a POST using the data above
-response_post = requests.post(f"{API_URL}/inference/", json=data) # Your code here
+response_post = requests.post(f"{API_URL}/inference", json=data) # Your code here
 
 response_post.status_code == 200
 
@@ -46,4 +46,5 @@ print(f"POST request successful. Status code: {response_get.status_code}")
 
 # TODO: print the result
 # print()
-result = response_get.json().get("result")
+result = response_post.json().get("result")
+print(result)
