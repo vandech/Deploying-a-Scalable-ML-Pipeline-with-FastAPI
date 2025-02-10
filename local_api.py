@@ -16,7 +16,7 @@ print(f"GET request successful. Status code: {response_get.status_code}")
 # TODO: print the welcome message
 # print()
 message = response_get.json().get("message")
-
+print(message)
 
 data = {
     "age": 37,
